@@ -1,0 +1,46 @@
+services:
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: goose-openwebui
+    ports:
+      - "3004:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+    volumes:
+      - openwebui_data:/app/backend/data
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant
+    container_name: goose-qdrant
+    ports:
+      - "6334:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16
+    container_name: goose-postgres
+    environment:
+      POSTGRES_USER: goose
+      POSTGRES_PASSWORD: goosepass
+      POSTGRES_DB: goose_ai
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7
+    container_name: goose-redis
+    ports:
+      - "6374:6379"
+    restart: unless-stopped
+
+volumes:
+  openwebui_data:
+  qdrant_data:
+  postgres_data:

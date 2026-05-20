@@ -1,0 +1,7 @@
+backups/
+logs/
+models/
+vectorstore/
+datasets/
+*.tar.gz
+.env
