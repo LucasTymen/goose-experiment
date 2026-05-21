@@ -8,7 +8,11 @@ from tool_gateway.services.embedding_service import create_embedding
 from tool_gateway.services.qdrant_service import (
     client,
     init_collection,
-    COLLECTION_NAME
+    init_all_collections,
+    get_all_collections,
+    search_memory,
+    COLLECTION_NAME,
+    COLLECTIONS
 )
 
 from qdrant_client.models import PointStruct
@@ -37,6 +41,12 @@ class ATSRequest(BaseModel):
 
 class MemoryRequest(BaseModel):
     content: str
+
+
+class SearchRequest(BaseModel):
+    query: str
+    collection: str = "candidate_memory"
+    limit: int = 5
 
 
 @app.get("/")
@@ -132,5 +142,87 @@ def memory_store(req: MemoryRequest):
     return {
         "status": "stored",
         "point_id": point_id
+    }
+
+
+@app.get("/memory/collections")
+def list_collections():
+    """Liste toutes les collections Qdrant existantes."""
+    collections = get_all_collections()
+    
+    result = {
+        "collections": collections,
+        "count": len(collections)
+    }
+    
+    event = {
+        "timestamp": str(datetime.utcnow()),
+        "action": "list_collections"
+    }
+    
+    insert_audit("list_collections", event)
+    
+    return result
+
+
+@app.post("/memory/collections/init")
+def init_collections():
+    """Initialise toutes les collections Qdrant définies dans la taxonomy."""
+    result = init_all_collections()
+    
+    event = {
+        "timestamp": str(datetime.utcnow()),
+        "action": "init_collections",
+        "created": result["created"],
+        "existed": result["existed"]
+    }
+    
+    insert_audit("init_collections", event)
+    
+    return {
+        "status": "initialized",
+        **result
+    }
+
+
+@app.post("/memory/search")
+def memory_search(req: SearchRequest):
+    """
+    Recherche sémantique dans une collection Qdrant.
+    
+    Args:
+        query: Texte à rechercher
+        collection: Nom de la collection (défaut: candidate_memory)
+        limit: Nombre de résultats (défaut: 5)
+    
+    Returns:
+        Liste de résultats avec scores et payloads
+    """
+    # Créer l'embedding de la requête
+    embedding = create_embedding(req.query)
+    
+    # Rechercher dans Qdrant
+    results = search_memory(
+        collection_name=req.collection,
+        query_vector=embedding,
+        limit=req.limit
+    )
+    
+    # Audit
+    event = {
+        "timestamp": str(datetime.utcnow()),
+        "action": "memory_search",
+        "query": req.query[:50],  # Truncated for audit
+        "collection": req.collection,
+        "results_count": len(results)
+    }
+    
+    insert_audit("memory_search", event)
+    
+    return {
+        "status": "completed",
+        "query": req.query,
+        "collection": req.collection,
+        "results": results
     }
 

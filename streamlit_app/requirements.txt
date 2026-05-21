@@ -1,0 +1,20 @@
+# Streamlit Workbench - GOOSE AI Job Application
+# ====================================================
+
+# Core Streamlit
+streamlit>=1.28.0
+
+# HTTP client pour FastAPI
+requests>=2.31.0
+
+# Pour le rendu HTML/PDF (à venir)
+# weasyprint>=60.0
+
+# Pour la gestion des données
+pandas>=2.0.0
+
+# Pour les dates
+python-dateutil>=0.8.2
+
+# Pour les logs
+loguru>=0.7.0
