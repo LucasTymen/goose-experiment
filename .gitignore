@@ -5,3 +5,8 @@ vectorstore/
 datasets/
 *.tar.gz
 .env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
