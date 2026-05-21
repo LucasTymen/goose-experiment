@@ -1,0 +1,5 @@
+NAME                       ID              SIZE      MODIFIED      
+nomic-embed-text:latest    0a109f422b47    274 MB    5 minutes ago    
+codellama:latest           8fdf8f752f6e    3.8 GB    33 hours ago     
+llama3:latest              365c0bd3c000    4.7 GB    33 hours ago     
+mistral:latest             6577803aa9a0    4.4 GB    33 hours ago     

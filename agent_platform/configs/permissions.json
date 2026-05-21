@@ -1,0 +1,25 @@
+{
+  "safe_tools": [
+    "generate_cv",
+    "analyze_job",
+    "store_memory",
+    "search_memory",
+    "export_pdf",
+    "read_local_files"
+  ],
+
+  "restricted_tools": [
+    "shell_execution",
+    "docker_access",
+    "external_http",
+    "workflow_modification"
+  ],
+
+  "forbidden_tools": [
+    "sudo",
+    "rm_rf",
+    "privileged_docker",
+    "system_modification",
+    "production_access"
+  ]
+}

@@ -1,0 +1,102 @@
+=== DATE ===
+Wed May 20 18:53:17 CEST 2026
+
+=== CPU ===
+Architecture:                         x86_64
+CPU op-mode(s):                       32-bit, 64-bit
+Address sizes:                        39 bits physical, 48 bits virtual
+Byte Order:                           Little Endian
+CPU(s):                               16
+On-line CPU(s) list:                  0-15
+Vendor ID:                            GenuineIntel
+Model name:                           Intel(R) Core(TM) i9-10980HK CPU @ 2.40GHz
+CPU family:                           6
+Model:                                165
+Thread(s) per core:                   2
+Core(s) per socket:                   8
+Socket(s):                            1
+Stepping:                             2
+BogoMIPS:                             6192.02
+Flags:                                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon rep_good nopl xtopology cpuid pni pclmulqdq vmx ssse3 fma cx16 pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi ept vpid ept_ad fsgsbase bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt xsaveopt xsavec xgetbv1 xsaves md_clear flush_l1d arch_capabilities
+Virtualization:                       VT-x
+Hypervisor vendor:                    Microsoft
+Virtualization type:                  full
+L1d cache:                            256 KiB (8 instances)
+L1i cache:                            256 KiB (8 instances)
+L2 cache:                             2 MiB (8 instances)
+L3 cache:                             16 MiB (1 instance)
+Vulnerability Gather data sampling:   Unknown: Dependent on hypervisor status
+Vulnerability Itlb multihit:          KVM: Mitigation: VMX disabled
+Vulnerability L1tf:                   Not affected
+Vulnerability Mds:                    Not affected
+Vulnerability Meltdown:               Not affected
+Vulnerability Mmio stale data:        Vulnerable: Clear CPU buffers attempted, no microcode; SMT Host state unknown
+Vulnerability Reg file data sampling: Not affected
+Vulnerability Retbleed:               Mitigation; Enhanced IBRS
+Vulnerability Spec rstack overflow:   Not affected
+Vulnerability Spec store bypass:      Mitigation; Speculative Store Bypass disabled via prctl and seccomp
+Vulnerability Spectre v1:             Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:             Mitigation; Enhanced / Automatic IBRS; IBPB conditional; RSB filling; PBRSB-eIBRS SW sequence; BHI SW loop, KVM SW loop
+Vulnerability Srbds:                  Unknown: Dependent on hypervisor status
+Vulnerability Tsx async abort:        Not affected
+
+=== MEMORY ===
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       3.3Gi        10Gi        44Mi       1.7Gi        11Gi
+Swap:          4.0Gi       130Mi       3.9Gi
+
+=== DISK ===
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdc       1007G  171G  786G  18% /
+rootfs          7.8G  2.4M  7.8G   1% /init
+none            7.8G     0  7.8G   0% /dev/shm
+tmpfs           4.0M     0  4.0M   0% /sys/fs/cgroup
+none            7.8G  1.8M  7.8G   1% /run
+none            7.8G     0  7.8G   0% /run/lock
+none            7.8G  324K  7.8G   1% /run/user
+tmpfs           7.8G     0  7.8G   0% /run/qemu
+drivers         3.4T  2.9T  548G  85% /usr/lib/wsl/drivers
+none            7.8G     0  7.8G   0% /usr/lib/wsl/lib
+none            7.8G  4.0K  7.8G   1% /mnt/wsl
+none            7.8G   76K  7.8G   1% /mnt/wslg/versions.txt
+none            7.8G   76K  7.8G   1% /mnt/wslg/doc
+none            7.8G     0  7.8G   0% /usr/lib/modules/5.15.167.4-microsoft-standard-WSL2
+snapfuse        128K  128K     0 100% /snap/bare/5
+snapfuse         74M   74M     0 100% /snap/core22/2339
+snapfuse         74M   74M     0 100% /snap/core22/2411
+snapfuse         67M   67M     0 100% /snap/core24/1587
+snapfuse         67M   67M     0 100% /snap/core24/1643
+snapfuse        247M  247M     0 100% /snap/firefox/8274
+snapfuse        247M  247M     0 100% /snap/firefox/8306
+snapfuse        517M  517M     0 100% /snap/gnome-42-2204/226
+snapfuse        532M  532M     0 100% /snap/gnome-42-2204/247
+snapfuse        607M  607M     0 100% /snap/gnome-46-2404/153
+snapfuse         92M   92M     0 100% /snap/gtk-common-themes/1535
+snapfuse        395M  395M     0 100% /snap/mesa-2404/1165
+snapfuse         49M   49M     0 100% /snap/snapd/26382
+snapfuse         50M   50M     0 100% /snap/snapd/26865
+C:\             3.4T  2.9T  548G  85% /mnt/c
+
+=== DOCKER ===
+CONTAINER ID   IMAGE                                COMMAND                  CREATED        STATUS                                  PORTS                                                   NAMES
+fb42ba540387   ghcr.io/open-webui/open-webui:main   "bash start.sh"          10 hours ago   Up 10 hours (healthy)                   0.0.0.0:3004->8080/tcp, [::]:3004->8080/tcp             goose-openwebui
+0d2f0baf7eaa   postgres:16                          "docker-entrypoint.s…"   11 hours ago   Up 11 hours                             0.0.0.0:5434->5432/tcp, [::]:5434->5432/tcp             goose-postgres
+4b0f29c2354d   qdrant/qdrant                        "./entrypoint.sh"        11 hours ago   Up 11 hours                             6334/tcp, 0.0.0.0:6334->6333/tcp, [::]:6334->6333/tcp   goose-qdrant
+3dcfd729e7ed   redis:7                              "docker-entrypoint.s…"   11 hours ago   Up 11 hours                             0.0.0.0:6374->6379/tcp, [::]:6374->6379/tcp             goose-redis
+a09cbf3e690b   squidresearch-enriched-linux         "uvicorn main:app --…"   7 weeks ago    Up 44 hours                             127.0.0.1:8081->8080/tcp                                enriched-linux-container
+61eabdcf66f6   squidresearch-web                    "/bin/bash /usr/src/…"   2 months ago   Up 44 hours                             0.0.0.0:8001->8000/tcp, [::]:8001->8000/tcp             django_dev
+088e28c882ae   docker.n8n.io/n8nio/n8n:latest       "tini -- /docker-ent…"   2 months ago   Up 44 hours                             0.0.0.0:5680->5678/tcp, [::]:5680->5678/tcp             n8n_dev
+d114e20fa741   flowiseai/flowise:latest             "flowise start"          2 months ago   Up 44 hours                             0.0.0.0:3002->3000/tcp, [::]:3002->3000/tcp             flowise_dev
+2fcde1185959   squidresearch-beat                   "celery -A squidrese…"   2 months ago   Restarting (1) Less than a second ago                                                           celery_beat_dev
+a1158b56cd9e   squidresearch-worker                 "celery -A squidrese…"   2 months ago   Restarting (1) Less than a second ago                                                           celery_worker_dev
+1830136f7a9b   dperson/torproxy:latest              "/sbin/tini -- /usr/…"   2 months ago   Up 44 hours (healthy)                   8118/tcp, 9050-9051/tcp                                 tor_dev
+62d6c3b66f6c   redis:7-alpine                       "docker-entrypoint.s…"   2 months ago   Up 44 hours                             6379/tcp                                                redis_dev
+05b1da5ba15f   postgres:15                          "docker-entrypoint.s…"   2 months ago   Up 44 hours                             127.0.0.1:5432->5432/tcp                                postgres_dev
+eb37708816f6   e195b2889efd                         "docker-entrypoint.s…"   7 months ago   Up 44 hours                             5432/tcp                                                a703d5f914cf_postgres
+
+=== OLLAMA MODELS ===
+NAME                       ID              SIZE      MODIFIED     
+nomic-embed-text:latest    0a109f422b47    274 MB    10 hours ago    
+codellama:latest           8fdf8f752f6e    3.8 GB    43 hours ago    
+llama3:latest              365c0bd3c000    4.7 GB    43 hours ago    
+mistral:latest             6577803aa9a0    4.4 GB    43 hours ago    

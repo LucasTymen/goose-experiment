@@ -102,6 +102,30 @@ class APIClient:
     def root(self) -> Dict:
         """Récupère les infos de base."""
         return self._request("GET", "/")
+    
+    # === JOBS ===
+    def list_jobs(self) -> Dict:
+        """Liste tous les jobs."""
+        return self._request("GET", "/jobs")
+    
+    def create_job(self, title: str, company: str, description: str, 
+                  location: Optional[str] = None, url: Optional[str] = None,
+                  source: str = "manual", skills: Optional[List[str]] = None) -> Dict:
+        """Crée un nouveau job avec calcul ATS automatique."""
+        data = {
+            "title": title,
+            "company": company,
+            "description": description,
+            "location": location,
+            "url": url,
+            "source": source,
+            "skills": skills or []
+        }
+        return self._request("POST", "/jobs", data=data)
+    
+    def score_job(self, job_id: str, skills: List[str]) -> Dict:
+        """Recalcule le score ATS pour un job existant."""
+        return self._request("POST", f"/jobs/{job_id}/score", data={"skills": skills})
 
 
 # Instance globale

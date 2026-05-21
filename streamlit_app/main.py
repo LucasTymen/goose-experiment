@@ -71,8 +71,9 @@ def main():
     if page == "🏠 Accueil":
         show_home()
     elif page == "📋 Jobs":
-        st.warning("📌 Page en développement - Priorité 2")
-        st.markdown("Cette page sera implémentée après Memory Explorer.")
+        # Charger la page Jobs
+        from pages._2_Jobs import show as jobs_show
+        jobs_show()
     elif page == "👤 Candidate Profile":
         st.warning("📌 Page en développement - Priorité 3")
         st.markdown("Cette page sera implémentée après Jobs.")
@@ -106,7 +107,7 @@ def show_home():
         
         st.markdown("**Prochaines étapes :**")
         st.markdown("1. ✅ Memory Explorer (Terminé)")
-        st.markdown("2. ⏳ Jobs Page")
+        st.markdown("2. ✅ Jobs Page (Terminé)")
         st.markdown("3. ⏳ Candidate Profile")
         st.markdown("4. ⏳ CV Generator")
     
@@ -127,7 +128,7 @@ def show_home():
         st.subheader("🎯 Objectifs")
         st.markdown("""
         - ✅ **Memory Explorer** : Explorer la mémoire Qdrant
-        - 📋 **Jobs** : Gérer les offres d'emploi
+        - ✅ **Jobs** : Gérer les offres d'emploi
         - 👤 **Profile** : profil candidat complet
         - 📄 **CV Generator** : Génération intelligente
         - 🔄 **Workflows** : Automatisation avec n8n

@@ -1,0 +1,38 @@
+services:
+
+  n8n_lab:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: goose-n8n-lab
+
+    ports:
+      - "5684:5678"
+
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=goose-postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=goose_ai
+      - DB_POSTGRESDB_USER=goose
+      - DB_POSTGRESDB_PASSWORD=goosepass
+
+      - N8N_SECURE_COOKIE=false
+      - GENERIC_TIMEZONE=Europe/Paris
+
+    volumes:
+      - n8n_lab_data:/home/node/.n8n
+
+    networks:
+      - goose_stack
+
+    restart: unless-stopped
+
+volumes:
+  n8n_lab_data:
+
+networks:
+  goose_stack:
+    external: true

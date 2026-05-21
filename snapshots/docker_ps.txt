@@ -1,0 +1,15 @@
+CONTAINER ID   IMAGE                                COMMAND                  CREATED          STATUS                          PORTS                                                   NAMES
+fb42ba540387   ghcr.io/open-webui/open-webui:main   "bash start.sh"          41 minutes ago   Up 15 minutes (healthy)         0.0.0.0:3004->8080/tcp, [::]:3004->8080/tcp             goose-openwebui
+0d2f0baf7eaa   postgres:16                          "docker-entrypoint.s…"   53 minutes ago   Up 53 minutes                   0.0.0.0:5434->5432/tcp, [::]:5434->5432/tcp             goose-postgres
+4b0f29c2354d   qdrant/qdrant                        "./entrypoint.sh"        53 minutes ago   Up 53 minutes                   6334/tcp, 0.0.0.0:6334->6333/tcp, [::]:6334->6333/tcp   goose-qdrant
+3dcfd729e7ed   redis:7                              "docker-entrypoint.s…"   53 minutes ago   Up 53 minutes                   0.0.0.0:6374->6379/tcp, [::]:6374->6379/tcp             goose-redis
+a09cbf3e690b   squidresearch-enriched-linux         "uvicorn main:app --…"   7 weeks ago      Up 35 hours                     127.0.0.1:8081->8080/tcp                                enriched-linux-container
+61eabdcf66f6   squidresearch-web                    "/bin/bash /usr/src/…"   2 months ago     Up 35 hours                     0.0.0.0:8001->8000/tcp, [::]:8001->8000/tcp             django_dev
+088e28c882ae   docker.n8n.io/n8nio/n8n:latest       "tini -- /docker-ent…"   2 months ago     Up 35 hours                     0.0.0.0:5680->5678/tcp, [::]:5680->5678/tcp             n8n_dev
+d114e20fa741   flowiseai/flowise:latest             "flowise start"          2 months ago     Up 35 hours                     0.0.0.0:3002->3000/tcp, [::]:3002->3000/tcp             flowise_dev
+2fcde1185959   squidresearch-beat                   "celery -A squidrese…"   2 months ago     Restarting (1) 36 seconds ago                                                           celery_beat_dev
+a1158b56cd9e   squidresearch-worker                 "celery -A squidrese…"   2 months ago     Restarting (1) 37 seconds ago                                                           celery_worker_dev
+1830136f7a9b   dperson/torproxy:latest              "/sbin/tini -- /usr/…"   2 months ago     Up 35 hours (healthy)           8118/tcp, 9050-9051/tcp                                 tor_dev
+62d6c3b66f6c   redis:7-alpine                       "docker-entrypoint.s…"   2 months ago     Up 35 hours                     6379/tcp                                                redis_dev
+05b1da5ba15f   postgres:15                          "docker-entrypoint.s…"   2 months ago     Up 35 hours                     127.0.0.1:5432->5432/tcp                                postgres_dev
+eb37708816f6   e195b2889efd                         "docker-entrypoint.s…"   7 months ago     Up 35 hours                     5432/tcp                                                a703d5f914cf_postgres
