@@ -1,12 +1,44 @@
+# Security: Never commit configuration files with secrets
+tool_gateway/config/telegram_config.py
+tool_gateway/config/*.py
+!tool_gateway/config/__init__.py
+*.config.py
+*.secret.py
+*.credentials
+*.secrets
+.env
+.env.local
+.env.*
+
+# Local configuration directories
+local_config/
+config/
+
+# Backup and data directories
 backups/
 logs/
 models/
 vectorstore/
 datasets/
 *.tar.gz
-.env
 
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+*.backup
