@@ -1,7 +1,11 @@
 # Telegram Bot Configuration for GOOSE
 # ========================================
+# 
+# ⚠️ SECURITY NOTICE: This file contains placeholder values.
+# To use: Copy from telegram_config.py.template or set environment variables.
+# NEVER commit actual tokens to Git!
 
-# Token du bot (à garder SECRET)
+# Token du bot (à garder SECRET) - À configurer via variable d'environnement
 TELEGRAM_BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN_HERE"
 
 # Nom du bot
@@ -10,7 +14,7 @@ TELEGRAM_BOT_NAME = "RG4YZClawRG4YZ_bot"
 # ID du bot
 TELEGRAM_BOT_ID = 2025051518
 
-# Pairing code (pour OpenClaw)
+# Pairing code (pour OpenClaw) - À configurer via variable d'environnement
 TELEGRAM_PAIRING_CODE = "YOUR_PAIRING_CODE_HERE"
 
 # Configuration du polling

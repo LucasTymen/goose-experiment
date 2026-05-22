@@ -1,4 +1,6 @@
 # Security: Never commit configuration files with secrets
+# But allow template files
+!tool_gateway/config/*.template
 tool_gateway/config/telegram_config.py
 tool_gateway/config/*.py
 !tool_gateway/config/__init__.py
