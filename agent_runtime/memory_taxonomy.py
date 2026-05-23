@@ -259,6 +259,28 @@ MEMORY_COLLECTIONS: Dict[str, MemoryCollection] = {
         default_limit=5,
         default_confidence_threshold=0.7,
     ),
+    
+    # 10. Permanent Memory (mémoireDure)
+    "mémoireDure_memory": MemoryCollection(
+        name="mémoireDure_memory",
+        description="Mémoires permanentes stockées dans private/mémoireDure/. Chargées automatiquement à chaque session.",
+        vector_size=384,
+        metadata_schema={
+            "content": str,
+            "source": str,
+            "type": str,
+            "category": str,
+            "priority": str,
+            "user_id": str,
+            "timestamp": datetime,
+        },
+        required_metadata=["content", "source", "type", "category", "user_id", "timestamp"],
+        default_limit=10,
+        default_confidence_threshold=0.9,
+        index_params={
+            "optimizers_config": {"indexing_threshold": 0},
+        },
+    ),
 }
 
 

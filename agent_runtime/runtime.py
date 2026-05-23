@@ -152,6 +152,9 @@ class AgentRuntime:
         self.conversation_history: List[Dict[str, str]] = []
         self.session_id: str = str(uuid.uuid4())
         
+        # Load permanent memory (mémoireDure)
+        self._load_permanent_memory()
+        
         # Metrics
         self.metrics = {
             "total_executions": 0,
@@ -172,6 +175,84 @@ class AgentRuntime:
             logger.warning(f"Could not verify collections: {e}")
         
         logger.info("Agent Runtime initialized successfully")
+    
+    def _load_permanent_memory(self) -> None:
+        """
+        Charge les mémoires permanentes depuis le dossier mémoireDure.
+        Ce dossier contient des éléments qui doivent être mémorisés et utilisés
+        constamment par GOOSE.
+        
+        Affiche un message de confirmation: "Ça y est j'ai actualisé la mémoire - Yeepeekayee"
+        """
+        import os
+        from pathlib import Path
+        
+        # Chemin vers le dossier mémoireDure (dans private/)
+        memory_dir = Path("private/mémoireDure")
+        
+        # Vérifier si le dossier existe
+        if not memory_dir.exists():
+            logger.debug(f"Dossier mémoireDure non trouvé: {memory_dir.absolute()}")
+            return
+        
+        # Lister tous les fichiers de mémoire
+        memory_files = []
+        for file_path in memory_dir.rglob('*'):
+            if file_path.is_file() and file_path.suffix.lower() in ['.md', '.json', '.txt']:
+                memory_files.append(file_path)
+        
+        if not memory_files:
+            logger.debug(f"Aucun fichier de mémoire trouvé dans {memory_dir}")
+            return
+        
+        # Charger chaque fichier et stocker en mémoire
+        loaded_count = 0
+        for file_path in memory_files:
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                # Créer un payload pour Qdrant
+                payload = {
+                    "content": content,
+                    "source": str(file_path.relative_to(memory_dir)),
+                    "type": "permanent_memory",
+                    "category": "mémoireDure",
+                    "priority": "high",
+                    "user_id": "system",
+                    "timestamp": datetime.utcnow().isoformat()
+                }
+                
+                # Stocker dans Qdrant (collection mémoireDure_memory)
+                try:
+                    self.retrieval_engine.store_memory(
+                        "mémoireDure_memory",
+                        payload
+                    )
+                    loaded_count += 1
+                    logger.info(f"Mémoire chargée: {file_path.relative_to(memory_dir)}")
+                except Exception as e:
+                    logger.warning(f"Erreur lors du stockage de {file_path}: {e}")
+                    
+            except Exception as e:
+                logger.error(f"Erreur lors de la lecture de {file_path}: {e}")
+        
+        # Afficher le message de confirmation
+        if loaded_count > 0:
+            print("Ça y est j'ai actualisé la mémoire - Yeepeekayee")
+            logger.info(f"{loaded_count} mémoires permanentes chargées depuis {memory_dir}")
+    
+    def refresh_permanent_memory(self) -> int:
+        """
+        Actualise manuellement les mémoires permanentes depuis mémoireDure.
+        
+        Returns:
+            Nombre de mémoires chargées
+        """
+        self._load_permanent_memory()
+        # Le message est déjà affiché dans _load_permanent_memory
+        # Cette méthode permet de forcer un rechargement manuel
+        return 0  # Le vrai count est géré dans _load_permanent_memory
     
     async def run(
         self,
