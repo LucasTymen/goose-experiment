@@ -1,46 +1,204 @@
-# Security: Never commit configuration files with secrets
-# But allow template files
-!tool_gateway/config/*.template
+# =============================================================================
+# .gitignore pour GOOSE
+# =============================================================================
+# Ce fichier spécifie quels fichiers et répertoires ne doivent PAS être
+# versionnés dans Git. Cela inclut:
+# - Fichiers contenant des secrets (tokens, mots de passe, clés API)
+# - Fichiers de configuration locale
+# - Données personnelles
+# - Fichiers générés automatiquement
+# - Fichiers temporaires
+#
+# IMPORTANT: Tout fichier contenant des secrets doit être dans ce fichier
+# =============================================================================
+
+# =============================================================================
+# SECURITY - Fichiers contenant des secrets (NE JAMAIS COMMITTER)
+# =============================================================================
+
+# Configuration avec secrets
 tool_gateway/config/telegram_config.py
 tool_gateway/config/*.py
 !tool_gateway/config/__init__.py
+!tool_gateway/config/*.template
 *.config.py
 *.secret.py
+*.secrets.py
 *.credentials
-*.secrets
+*.credentials.py
+*.token
+*.tokens
+*.key
+*.keys
+*.password
+*.passwd
+
+# Fichiers d'environnement
 .env
 .env.local
-.env.*
+.env.*.local
+.env.development
+.env.staging
+.env.production
+.env.example
 
-# Local configuration directories
+# Fichiers de secrets spécifiques
+secrets.json
+secrets.yml
+secrets.yaml
+api_keys.json
+api_keys.yml
+auth tokens.txt
+
+# =============================================================================
+# DONNÉES PERSONNELLES ET SENSIBLES
+# =============================================================================
+
+# Dossier privé pour les données personnelles (NE JAMAIS COMMITTER)
+# Stockez ici:
+# - Configuration locale avec secrets
+# - Fichiers de données personnels
+# - Clés API
+# - Certificats
+# - Tout fichier sensible
+private/
+private/**/
+
+# Fichiers .gitkeep dans les dossiers ignorés
+.gitkeep
+private/**/.gitkeep
+
+# Fichiers de configuration locale
 local_config/
 config/
 
-# Backup and data directories
+# Données et backups
+data/
 backups/
-logs/
+datasets/
 models/
 vectorstore/
-datasets/
-*.tar.gz
 
-# Python
+# Fichiers de log avec informations sensibles
+*.log
+logs/
+
+# =============================================================================
+# PYTHON
+# =============================================================================
+
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# =============================================================================
 # IDE
+# =============================================================================
+
 .idea/
 .vscode/
 *.swp
 *.swo
+*~
+.project
+.pydevproject
+.settings/
 
+# =============================================================================
 # OS
+# =============================================================================
+
 .DS_Store
 Thumbs.db
 
-# Temporary files
+# =============================================================================
+# TEMPORARY FILES
+# =============================================================================
+
 *.tmp
-*.log
+*.temp
 *.bak
 *.backup
+*.orig
+*.rej
+*~
+
+# =============================================================================
+# LOGS
+# =============================================================================
+
+*.log
+/tmp/
+
+# =============================================================================
+# TESTING
+# =============================================================================
+
+/test_
+/tox/
+
+# =============================================================================
+# DOCUMENTATION
+# =============================================================================
+
+*.md.swp
+
+# =============================================================================
+# END
+# =============================================================================
